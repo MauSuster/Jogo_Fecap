@@ -10,8 +10,11 @@ public class QuizController : MonoBehaviour
     [Header("Referências")]
     public StepByStepClimber[] capsulas;
     public TextMeshProUGUI textoPergunta;
+    public TextMeshProUGUI txtErro;
     public Button botaoA, botaoB, botaoC, botaoD;
     public TurnBasedSorter turnBasedSorter;
+    public GameObject opcaoA, opcaoB, opcaoC, opcaoD;
+    public GameObject txtPergunta;
 
     [Header("Configuração da API")]
     [SerializeField] private string chave_api = "endrew123";
@@ -26,6 +29,13 @@ public class QuizController : MonoBehaviour
 #if UNITY_EDITOR
         Debug.ClearDeveloperConsole();
 #endif
+       //deixa os botoes e textos desativados ate o http dar certo.
+        opcaoA.SetActive(false);
+        opcaoB.SetActive(false);
+        opcaoC.SetActive(false);
+        opcaoD.SetActive(false);
+        txtPergunta.SetActive(false);
+
         botaoA.onClick.AddListener(() => StartCoroutine(Responder(1)));
         botaoB.onClick.AddListener(() => StartCoroutine(Responder(2)));
         botaoC.onClick.AddListener(() => StartCoroutine(Responder(3)));
@@ -54,9 +64,11 @@ public class QuizController : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
 {
     Debug.LogError("Erro na requisição: " + request.error);
+    txtErro.text = "Erro na requisição, entre em contato com o adimistrador sustermauricio@gmail.com";
 }
 else
 {
+    
     var wrapper = JsonUtility.FromJson<QuestoesWrapper>(request.downloadHandler.text);
     if (wrapper.questoes != null && wrapper.questoes.Length > 0)
     {
@@ -65,13 +77,18 @@ else
     }
     else
     {
-        Debug.LogError("Nenhuma questão foi recebida.");
+        txtErro.text = "Nenhuma questão foi recebida";
     }
 }
     }
 
     void ExibirQuestao()
     {
+        txtPergunta.SetActive(true);
+        opcaoA.SetActive(true);
+        opcaoB.SetActive(true);
+        opcaoC.SetActive(true);
+        opcaoD.SetActive(true);
         if (questaoAtual >= questoes.Length)
         {
             textoPergunta.text = "Fim do quiz!";
