@@ -3,7 +3,7 @@ using UnityEngine;
 public class DegrauSorteador : MonoBehaviour
 {
     public StepByStepClimber capsula; // Referência à cápsula que irá subir os degraus
-    public int maxDegraus = 5;
+    public int maxDegraus = 15;
 
     void Update()
     {
