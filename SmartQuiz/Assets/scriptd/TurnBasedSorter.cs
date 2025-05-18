@@ -23,7 +23,7 @@ public class TurnBasedSorter : MonoBehaviour
         // Tecla P → exibe a pontuação das cápsulas
         if (Input.GetKeyDown(KeyCode.P))
         {
-            for (int i = 0; i < capsulas.Length; i++)
+            for (int i = 0; i < capsulas.Length; i = i +1)
             {
                 Debug.Log($"Cápsula {i + 1} subiu {capsulas[i].pontosSubidos} degraus");
             }

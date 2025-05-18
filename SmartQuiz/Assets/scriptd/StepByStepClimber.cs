@@ -58,11 +58,11 @@ public class StepByStepClimber : MonoBehaviour
         int degrausASubir = Mathf.Clamp(quantidade, 0, degrausRestantes);
 
         // Loop para subir a quantidade de degraus especificada
-        for (int i = 0; i < degrausASubir; i++)
+        for (int i = 0; i < degrausASubir; i = i +1)
         {
             // Obtém o Transform do degrau atual para o qual a cápsula deve se mover
             Transform step = steps[degrauAtual];
-            Vector3 destinoComOffset = step.position + new Vector3(offsetLateral, 0f, 0f);
+            Vector3 destinoComOffset = step.position + new Vector3(offsetLateral, 0.3f, 0f);
 
             while (Vector3.Distance(transform.position, destinoComOffset) > 0f)
             {
@@ -78,7 +78,7 @@ public class StepByStepClimber : MonoBehaviour
             pontosSubidos++; // Incrementa a pontuação
 
             // Verifica se a cápsula chegou ao quinto degrau
-            if (degrauAtual == 3)
+            if (degrauAtual == 15)
             {
                 // A cápsula chegou no quinto degrau, então o jogo deve terminar
                 FimDeJogo();

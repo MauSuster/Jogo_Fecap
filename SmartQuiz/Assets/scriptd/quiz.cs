@@ -18,7 +18,7 @@ public class QuizController : MonoBehaviour
 
     [Header("Configuração da API")]
     [SerializeField] private string chave_api = "endrew123";
-    [SerializeField] private int quantidadeQuestoes = 5;
+    [SerializeField] private int quantidadeQuestoes = 15;
     [SerializeField] private string url = "https://script.google.com/macros/s/AKfycbxWwdShZwyJRdEF55T2FEE2wl5xbyfYbgsBbW9kjE75DZDi6_JTegYqYvSq4-rXa70C/exec";
 
     private Questao[] questoes;
@@ -91,9 +91,8 @@ else
         opcaoD.SetActive(true);
         if (questaoAtual >= questoes.Length)
         {
-            textoPergunta.text = "Fim do quiz!";
+            Start();
             SetBotoesAtivos(false);
-            return;
         }
 
         var q = questoes[questaoAtual];
